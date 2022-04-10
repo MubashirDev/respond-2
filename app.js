@@ -49,6 +49,7 @@ const data = [
     }
 ];
 
+//helper function will check if two transactions are duplicates
 const areDuplicates = (transaction1, transaction2) => {
     return Math.abs(new Date(transaction1.time) - new Date(transaction2.time))/1000 < 60;
 }
@@ -65,6 +66,7 @@ const findDuplicateTransactions = (transactions) => {
 
 
     const result = []
+    //check if there are duplicates
     groups
         .map(group =>group.sort((a, b) => new Date(a.time) - new Date(b.time)))
         .filter(group => group.length > 1)
@@ -76,7 +78,7 @@ const findDuplicateTransactions = (transactions) => {
                 result.push([first, ...duplicates]);
             }
     });
-
+    //return the duplicates with sort by time
     return result.sort((a, b) => new Date(a[0].time) - new Date(b[0].time));
 }
 
